@@ -230,7 +230,7 @@ footer .footer-right li{
 		from(rgba(0, 0, 0, 1)), 
 		to(rgba(0, 0, 0, 1))
 		),
-	url("./assets/libraryBackground.jpeg"); /* ---- Image used for background ---- */
+	url("/assets/libraryBackground.jpeg"); /* ---- Image used for background ---- */
 	
 	/* ---- -webkit-, -moz-, or -o- tags used to support transitions between browsers ---- */
 	background:
