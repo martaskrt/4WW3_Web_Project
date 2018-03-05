@@ -1117,21 +1117,6 @@ input:valid {
 		flex-direction: column;
 	}
 
-	.review_category{
-	display: -webkit-inline-box;
-	display: -ms-inline-flexbox;
-	-webkit-box-orient: horizontal;
-	-webkit-box-direction: normal;
-	-ms-flex-direction: row;
-	flex-direction: row;
-	font: 1em bookman old style;
-	max-width: 500px;
-	background-color: white;
-	opacity: 0.6;
-	padding: 2%;
-	margin:20px;
-}
-
 	.review_page_layout h2{
 		font: 2em bookman old style;
 		color: #327DEA;
@@ -1147,7 +1132,8 @@ input:valid {
 	}
 
 	.review_category input[type=text] {
-		width: 120px;
+		width: auto;
+
 	}
 
 	.rating{
