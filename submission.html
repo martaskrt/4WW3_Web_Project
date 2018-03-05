@@ -5,6 +5,7 @@
 	<meta charset="UTF-8">
 	<title>TL: Write a Review</title>
 	<link rel="stylesheet" type="text/css" href="/css/style.css" />
+	<script src="/javascript/get_geolocation.js"></script>
 </head>
 
 <body>
@@ -45,7 +46,6 @@
 					</div>
 					<div class="review_category">
 						<label>To get library location, either press button or enter it manually below:<abbr title="This field is required">*</abbr></label>
-						<script src="/javascript/get_geolocation.js"></script>
 						<button id="getLibLoc" onclick="getLocation()">Get library location</button>
 					</div>
 					<!-- Regex for longitude & latitude taken from: https://stackoverflow.com/questions/3518504/regular-expression-for-matching-latitude-longitude-coordinates -->
