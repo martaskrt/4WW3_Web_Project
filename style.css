@@ -922,7 +922,7 @@ td {
 		flex-direction: column;
 	}
 
-	img#hslMap{
+	#hslMap{
 		width: 300px;
 		height: 300px;
 		margin-left: 5px;
