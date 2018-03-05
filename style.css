@@ -1052,7 +1052,7 @@ img#bookStack{
 	font-size: 12px;
 	border-width: 2px;
 	color: black;
-	width: inherit;
+	width: auto;
 	height: 20px;
 	font: bookman old style;
 }	
@@ -1132,8 +1132,7 @@ input:valid {
 	}
 
 	.review_category input[type=text] {
-		width: auto;
-
+		width: 120px;
 	}
 
 	.rating{
