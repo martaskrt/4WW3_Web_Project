@@ -1122,6 +1122,10 @@ input:valid {
 		margin-left: 20px;
 	}
 
+	.review_category input[type=text] {
+		width: 100px;
+	}
+
 	.rating{
 		margin-left: 40px;
 	}
