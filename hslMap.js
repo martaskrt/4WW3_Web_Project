@@ -15,9 +15,5 @@
 			title: 'Health Science Library'
 		});
 
-		hslMarker.addListener('click', function() {
-			hslInfoWindow.open(map, hslMarker);
-		});
-
 	}
 
