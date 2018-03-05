@@ -1,13 +1,14 @@
 
 
 function getLocation() {
-	var lat = document.getElementById('latitude');
-	var lng = document.getElementById('longitude');
+
 	navigator.geolocation.getCurrentPosition(success,error);
 }
 
 function success(position){
 	var userPosition = position.coords;
+	var lat = document.getElementById('latitude');
+	var lng = document.getElementById('longitude');
 	lat.value = userPosition.latitude;
 	lng.value = userPosition.longitude;
 }
