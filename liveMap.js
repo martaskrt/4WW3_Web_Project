@@ -9,7 +9,7 @@
 
 	var content = [
 
-	`<h2 class="library_name"><a href="./individual_sample.html">Health Sciences Library</a></h2>
+	`<h2 class="library_name"><a href="sample/">Health Sciences Library</a></h2>
 			<div id="bodyContent">
 			<p><b>1280 Main St. W.</b></p>
 			<p>Mon-Thurs 8:45am-10:45pm
