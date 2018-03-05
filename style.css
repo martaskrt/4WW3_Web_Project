@@ -700,6 +700,7 @@ form #text{
 	width: 220px;
 }
 
+/* If input does not match Regex pattern (invalid input) */
 input:invalid{
   border-color: #900;
 }

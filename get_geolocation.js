@@ -16,4 +16,4 @@ function success(position){
 
 function error(error) {
   	console.warn(`ERROR(${error.code}): ${error.message}`); //print error in console that position could not be obtained
-}
+  }

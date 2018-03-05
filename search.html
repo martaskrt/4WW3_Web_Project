@@ -5,18 +5,22 @@
 	<meta charset="UTF-8">
 	<title>The Librarian</title>
 	<link rel="stylesheet" type="text/css" href="/css/style.css" />
+	<!-- Function to get user's geolocation -->
 	<script>
 		function getLocation() {
+			//returns a Geolocation object that gives Web content access to the location of the device; parameters are the functions success, 
+			//which takes the Position object as its sole input parameter, and error, which takes a PositionError object as its sole input 
+			//parameter.
 		    navigator.geolocation.getCurrentPosition(success,error);
 		}
 		function success(position){
 			var userPosition = position.coords;
-			console.log(`Your current latitude is: ${userPosition.latitude}`);
-			console.log(`Your current longitude is: ${userPosition.longitude}`);
+			console.log(`Your current latitude is: ${userPosition.latitude}`); //print user latitude to console
+			console.log(`Your current longitude is: ${userPosition.longitude}`); //print user longitude to console
 		}
 
 		function error(error) {
-  			console.warn(`ERROR(${error.code}): ${error.message}`);
+  			console.warn(`ERROR(${error.code}): ${error.message}`);  //print error in console that position could not be obtained
 		}
 	</script>
 </head>
@@ -73,8 +77,8 @@
 					<div class="dropdown">
 						<button>Any &#x25BC;</button> <!-- Prompt for dropdown menu -->
 						<div class="dropdown_content"> <!--  Dropdown menu containing different distances  -->
+							<!--  Get user's geolocation using getLocation() function in header  -->
 							<button class="item" onclick="getLocation()">Current Location</button>
-
 						</div>
 					</div> 
 					<!-- Image of search icon which user can click to submit results -->
