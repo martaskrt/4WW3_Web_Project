@@ -1047,6 +1047,7 @@ img#bookStack{
 	margin-left: 100px;
 	width: 250px;
 	font: white;
+	overflow: visible;
 }
 
 /* Format for sample text in boxes where users will give input */
