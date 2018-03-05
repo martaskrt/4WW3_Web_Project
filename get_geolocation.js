@@ -7,8 +7,8 @@ function getLocation() {
 
 function success(position){
 	var userPosition = position.coords;
-	lat.innerHTML = userPosition.latitude;
-	lng.innerHTML = userPosition.longitude;
+	lat.value = userPosition.latitude;
+	lng.value = userPosition.longitude;
 }
 
 function error(error) {
