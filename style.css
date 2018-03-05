@@ -1043,6 +1043,12 @@ img#bookStack{
 	width: 200px;
 }
 
+#getLibLoc{
+	margin-left: 100px;
+	width: 250px;
+	font: white;
+}
+
 /* Format for sample text in boxes where users will give input */
 .review_category input[type=text] {
 	font-size: 12px;
