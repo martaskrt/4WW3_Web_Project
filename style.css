@@ -1111,8 +1111,8 @@ input:valid {
 
 	.review_category {
 		margin-top: 8px;
-		width: 100px;
-		margin-right: 20px;
+		width: 80px;
+		margin-right: 10px;
 		margin-left: 20px;
 	}
 	.review_page_layout img#bookStack{
