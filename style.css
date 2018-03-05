@@ -1113,6 +1113,7 @@ input:valid {
 		font: 2em bookman old style;
 		color: #327DEA;
 		margin-left: 20px;
+		background-color: white;
 	}
 
 	.review_category {
@@ -1123,7 +1124,7 @@ input:valid {
 	}
 
 	.review_category input[type=text] {
-		width: 100px;
+		width: 120px;
 	}
 
 	.rating{
