@@ -1125,9 +1125,8 @@ input:valid {
 
 	.review_category {
 		margin-top: 8px;
-		width: 80px;
 		margin-right: 20px;
-		margin-left: 20px;
+		margin-left: 100px;
 	}
 
 	.review_category input[type=text] {
