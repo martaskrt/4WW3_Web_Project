@@ -1109,6 +1109,12 @@ input:valid {
 		flex-direction: column;
 	}
 
+	.review_page_layout h2{
+		font: 2em bookman old style;
+		color: #327DEA;
+		margin-left: 20px;
+	}
+
 	.review_category {
 		margin-top: 8px;
 		width: 80px;
