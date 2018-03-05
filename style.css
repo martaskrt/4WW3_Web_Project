@@ -928,6 +928,12 @@ td {
 		margin-left: 5px;
 	}
 
+	#map{
+		width: 300px;
+		height: 300px;
+		margin-left: 5px;
+	}
+
 	/* ---- FORMAT FOR TABLE SUMMARIZING SEARCH RESULTS & INDIVIDUAL LIBRARY REVIEWS at screen sizes < 1024px ---- */
 	table{
 		width: 320px;
