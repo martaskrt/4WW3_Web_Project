@@ -1,9 +1,9 @@
 
 
 function getLocation() {
-	navigator.geolocation.getCurrentPosition(success,error);
 	var lat = document.getElementById('latitude');
-var lng = document.getElementById('longitude');
+	var lng = document.getElementById('longitude');
+	navigator.geolocation.getCurrentPosition(success,error);
 }
 
 function success(position){
