@@ -1108,6 +1108,13 @@ input:valid {
 		-ms-flex-direction: column;
 		flex-direction: column;
 	}
+
+	.review_category {
+		margin-top: 8px;
+		width: 100px;
+		margin-right: 20px;
+		margin-left: 20px;
+	}
 	.review_page_layout img#bookStack{
 		width: 320px;
 		height: 320px;
