@@ -238,19 +238,19 @@ footer .footer-right li{
 		rgba(0, 0, 0, 1), 
 		rgba(0, 0, 0, 1)
 		),
-	url("./assets/libraryBackground.jpeg");
+	url("/assets/libraryBackground.jpeg");
 	background:
 	-o-linear-gradient(
 		rgba(0, 0, 0, 1), 
 		rgba(0, 0, 0, 1)
 		),
-	url("./assets/libraryBackground.jpeg");
+	url("/assets/libraryBackground.jpeg");
 	background:
 	linear-gradient(
 		rgba(0, 0, 0, 1), 
 		rgba(0, 0, 0, 1)
 		),
-	url("./assets/libraryBackground.jpeg");
+	url("/assets/libraryBackground.jpeg");
 	background-size:cover;
 	background-repeat: no-repeat;
 	background-blend-mode: soft-light;
