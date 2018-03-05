@@ -43,6 +43,10 @@
 						<label>Library:<abbr title="This field is required">*</abbr></label>
 						<input type="text" placeholder="e.g. Thode Library" name="search" required minlength="1" title="Please enter a valid library">
 					</div>
+					<div class="review_category">
+						<label>To get library location, either press button or enter it manually below:<abbr title="This field is required">*</abbr></label>
+						<button class="item" onclick="getLocation()">Get library location</button>
+					</div>
 					<!-- Regex for longitude & latitude taken from: https://stackoverflow.com/questions/3518504/regular-expression-for-matching-latitude-longitude-coordinates -->
 					<div class="review_category">
 						<label>Latitude:<abbr title="This field is required">*</abbr></label>
