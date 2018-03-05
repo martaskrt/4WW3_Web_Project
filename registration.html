@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="UTF-8">
+	<title>TL: Sign Up</title>
+	<link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+
+<body>
+	<div class="content_page_background"> 	<!-- create wrapper for sign in page to structure background -->
+		<header> 	<!-- header for page when screen size is 1024 px-->
+			<img id="theLibLogo" src="./assets/theLibSmallLogo.svg" alt="theLibLogo"> 	<!-- logo image -->
+			<ul class="menu-left"> 	<!-- unordered list for left half of header; navigates to search or review pages -->
+				<li><a href="./search.html">Search</a></li>
+				<li><a href="./submission.html">Write a Review</a></li>
+			</ul>
+			<ul class="menu-right"> <!-- unordered list for right half of header; navigates to log in or sign up pages -->
+				<li><div class="button1"><a href="./logIn.html">Log In</a></div></li>
+				<li><div class="button1"><a href="./registration.html">Sign Up</a></div></li>
+			</ul>
+			<div class="dropdown"> <!-- header for page when screen size < 1024 px-->
+				<button class="button1">Menu &#x25BC;</button> <!-- Menu button that drops down to list of all pages-->
+				<div class="dropdown_content">
+					<div class="item"><a href="./search.html">Search</a></div>
+					<div class="item"><a href="./submission.html">Write a Review</a></div>
+					<div class="item"><a href="./logIn.html">Log In</a></div>
+					<div class="item"><a href="./registration.html">Sign Up</a></div>
+				</div>
+			</div> 
+		</header>
+
+		<main>
+			<!-- Page is divided into two columns: column 1 contains decorative images, column 2 contains sign up form-->
+			<div class="account_content">
+				<!-- Column containing decorative image -->
+				<img id="secondaryImage" src="./assets/personReading.jpeg" alt="personReading">
+				<!-- Column containg sign up form, which is divded into rows of prompts-->
+				<!-- function is located in js file called registration_validator -->
+				<script src="registration_validator.js"></script>
+				<form name="registrationForm" action="" method="post" onsubmit="formValidate(event)" novalidate>
+					<!-- Each row consists of line with sample input text -->
+					<input id="name" type="text" placeholder="NAME" name="name">
+					<p id="errorName">Please enter name in the format: First Last</p>
+					<div id="birthday">BIRTHDAY</div> <input type="date" name="bday">
+					<p id="errorBirthday">Please enter name in the format: Year-Month-Date</p>
+					<input type="email" placeholder="E-MAIL" id="email">
+					<p id="errorEmail">Please enter a valid email</p>
+					<input type="text" placeholder="USERNAME" id="uname">
+					<p id="errorUserName">Please enter a valid username (must contain at least 6 characters)</p>
+					<input type="password" placeholder="PASSWORD" id="pass">
+					<p id="errorPassword">Please enter a valid password (must contain at least 1 uppercase and lowercase letter, at least 1 digit, and at least 8 characters)</p>
+					<input type="password" placeholder="RE-ENTER PASSWORD" id="pass2">
+					<p id="errorReenteredPassword">Passwords do not match!</p>
+					<div id="text">I agree to a long list of terms and conditions that I won't read.</div><input type="checkbox" name="checkbox" value="yes">
+					<p id="errorUncheckedBox">You must agree to our terms and conditions!</p>
+					<button class="button button2">Submit</button> 
+				</form>
+			</div>
+		</main>
+
+		<footer>
+			<div class="footer-left"> <!-- Left half of footer contains social media icons -->
+					<img class="socialMediaIcon" src="./assets/facebook.svg" alt="facebook">
+					<img class="socialMediaIcon" src="./assets/twitter.svg" alt="twitter">
+					<img class="socialMediaIcon" src="./assets/instagram.svg" alt="instagram">
+			</div>
+			<ul class="footer-right"> <!-- Right half of footer contains site information -->
+				<li>About</li>
+				<li>Contact</li>
+				<li>Copyright &#169; Marta Skreta designs</li>
+			</ul>
+		</footer>
+	</div>
+</body>
+</html>
