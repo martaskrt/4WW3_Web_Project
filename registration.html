@@ -4,28 +4,28 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="UTF-8">
 	<title>TL: Sign Up</title>
-	<link rel="stylesheet" type="text/css" href="style.css" />
+	<link rel="stylesheet" type="text/css" href="/css/style.css" />
 </head>
 
 <body>
 	<div class="content_page_background"> 	<!-- create wrapper for sign in page to structure background -->
 		<header> 	<!-- header for page when screen size is 1024 px-->
-			<img id="theLibLogo" src="./assets/theLibSmallLogo.svg" alt="theLibLogo"> 	<!-- logo image -->
+			<img id="theLibLogo" src="/assets/theLibSmallLogo.svg" alt="theLibLogo"> 	<!-- logo image -->
 			<ul class="menu-left"> 	<!-- unordered list for left half of header; navigates to search or review pages -->
-				<li><a href="./search.html">Search</a></li>
-				<li><a href="./submission.html">Write a Review</a></li>
+				<li><a href="search/">Search</a></li>
+				<li><a href="submission/">Write a Review</a></li>
 			</ul>
 			<ul class="menu-right"> <!-- unordered list for right half of header; navigates to log in or sign up pages -->
-				<li><div class="button1"><a href="./logIn.html">Log In</a></div></li>
-				<li><div class="button1"><a href="./registration.html">Sign Up</a></div></li>
+				<li><div class="button1"><a href="logIn/">Log In</a></div></li>
+				<li><div class="button1"><a href="registration/">Sign Up</a></div></li>
 			</ul>
 			<div class="dropdown"> <!-- header for page when screen size < 1024 px-->
 				<button class="button1">Menu &#x25BC;</button> <!-- Menu button that drops down to list of all pages-->
 				<div class="dropdown_content">
-					<div class="item"><a href="./search.html">Search</a></div>
-					<div class="item"><a href="./submission.html">Write a Review</a></div>
-					<div class="item"><a href="./logIn.html">Log In</a></div>
-					<div class="item"><a href="./registration.html">Sign Up</a></div>
+					<div class="item"><a href="/">Search</a></div>
+					<div class="item"><a href="submission/">Write a Review</a></div>
+					<div class="item"><a href="logIn/">Log In</a></div>
+					<div class="item"><a href="registration/">Sign Up</a></div>
 				</div>
 			</div> 
 		</header>
@@ -34,10 +34,10 @@
 			<!-- Page is divided into two columns: column 1 contains decorative images, column 2 contains sign up form-->
 			<div class="account_content">
 				<!-- Column containing decorative image -->
-				<img id="secondaryImage" src="./assets/personReading.jpeg" alt="personReading">
+				<img id="secondaryImage" src="/assets/personReading.jpeg" alt="personReading">
 				<!-- Column containg sign up form, which is divded into rows of prompts-->
 				<!-- function is located in js file called registration_validator -->
-				<script src="registration_validator.js"></script>
+				<script src="/javascript/registration_validator.js"></script>
 				<form name="registrationForm" action="" method="post" onsubmit="formValidate(event)" novalidate>
 					<!-- Each row consists of line with sample input text -->
 					<input id="name" type="text" placeholder="NAME" name="name">
@@ -61,9 +61,9 @@
 
 		<footer>
 			<div class="footer-left"> <!-- Left half of footer contains social media icons -->
-					<img class="socialMediaIcon" src="./assets/facebook.svg" alt="facebook">
-					<img class="socialMediaIcon" src="./assets/twitter.svg" alt="twitter">
-					<img class="socialMediaIcon" src="./assets/instagram.svg" alt="instagram">
+					<img class="socialMediaIcon" src="/assets/facebook.svg" alt="facebook">
+					<img class="socialMediaIcon" src="/assets/twitter.svg" alt="twitter">
+					<img class="socialMediaIcon" src="/assets/instagram.svg" alt="instagram">
 			</div>
 			<ul class="footer-right"> <!-- Right half of footer contains site information -->
 				<li>About</li>
