@@ -45,16 +45,17 @@
 					</div>
 					<div class="review_category">
 						<label>To get library location, either press button or enter it manually below:<abbr title="This field is required">*</abbr></label>
+						<script src="/javascript/get_geolocation.js"></script>
 						<button id="getLibLoc" onclick="getLocation()">Get library location</button>
 					</div>
 					<!-- Regex for longitude & latitude taken from: https://stackoverflow.com/questions/3518504/regular-expression-for-matching-latitude-longitude-coordinates -->
 					<div class="review_category">
 						<label>Latitude:<abbr title="This field is required">*</abbr></label>
-						<input type="text" placeholder="e.g. 43.261059" name="search" required pattern="^(\+|-)?(?:90(?:(?:\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,6})?))$" title="Please enter a valid latitude"> 
+						<input type="text" id="latitude" placeholder="e.g. 43.261059" name="search" required pattern="^(\+|-)?(?:90(?:(?:\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,6})?))$" title="Please enter a valid latitude"> 
 					</div>
 					<div class="review_category">
 						<label>Longitude:<abbr title="This field is required">*</abbr></label>
-						<input type="text" placeholder="e.g. -79.922565" name="search" required pattern="^(\+|-)?(?:180(?:(?:\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,6})?))$" title="Please enter a valid longitude">
+						<input type="text" id="longitude" placeholder="e.g. -79.922565" name="search" required pattern="^(\+|-)?(?:180(?:(?:\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,6})?))$" title="Please enter a valid longitude">
 					</div>
 					<div class="review_category">
 						<label>Rate library:<abbr title="This field is required">*</abbr></label>
