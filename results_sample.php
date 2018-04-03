@@ -1,9 +1,11 @@
 <?php
-$pdo = new PDO('mysql:host=localhost; dbname=martas database', 'skretam','Philedelthia12');
-$template = "%" . $_POST["query"] . "%";
+if (!empty($_POST)){
+$pdo = new PDO('mysql:host=localhost; dbname=marts_database', 'skretam','Philedelthia12!?');
+$template = "%" . $_POST["search"] . "%";
 $get_the_posts = $pdo->prepare("SELECT libraryName, rating FROM Library WHERE libraryName LIKE ?");
 $get_the_posts->execute([$template]);
 $posts = $get_the_posts->fetchAll();
+}
 ?>
 	<!DOCTYPE html>
 	<html>
@@ -64,6 +66,7 @@ $posts = $get_the_posts->fetchAll();
 							<th class="fifty"></th>
 						</tr>
 						<?php
+						if (isset($posts)){
 						foreach ($posts as $number=>$content){
 							$key_plus = $number + 1;
 							echo '<tr>'; //<!-- Row #2 -->
@@ -71,38 +74,15 @@ $posts = $get_the_posts->fetchAll();
 							echo '<td>'; //<!-- Second column containg average rating of library -->
 								echo '<img id="4.5stars" src="/assets/4.5stars.svg" alt="5stars">';
 								echo '<div id="rating_number">' . $content['rating'] . '</div></td>'; 
-								echo '<td>' //<!-- Third column containg images of library -->
+								echo '<td>'; //<!-- Third column containg images of library -->
 									echo '<img class="item" src="/assets/tempImage.svg" alt="hthsci1">';
 									echo '<img class="item" src="/assets/tempImage.svg" alt="hthsci2">';
 									echo '<img class="item" src="/assets/tempImage.svg" alt="hthsci3">';
 								echo '</td>';
 							echo '</tr>';
 						}
+						}
 						?>
-							<tr> <!-- Row #3 -->
-								<td>2. Thode Library</td> <!-- First column containing library name-->
-								<td> <!-- Second column containg average rating of library -->
-									<img src="/assets/4stars.svg" alt="4stars">
-									<div class="rating_number">4.0/5</div>
-								</td> 
-								<td> <!-- Third column containg images of library -->
-									<img class="item" src="/assets/tempImage.svg" alt="thode1">
-									<img class="item" src="/assets/tempImage.svg" alt="thode2">
-									<img class="item" src="/assets/tempImage.svg" alt="thode3">
-								</td>
-							</tr>
-							<tr> <!-- Row #3 -->
-								<td>3. Mills Library</td> <!-- First column containing library name-->
-								<td> <!-- Second column containg average rating of library -->
-									<img src="/assets/3.7stars.svg" alt="3.7stars">
-									<div class="rating_number">3.7/5</div>
-								</td> 
-								<td> <!-- Third column containg images of library -->
-									<img class="item" src="/assets/tempImage.svg" alt="mills1">
-									<img class="item" src="/assets/tempImage.svg" alt="mills2">
-									<img class="item" src="/assets/tempImage.svg" alt="mills3">
-								</td>
-							</tr>
 						</table>
 					</div>
 				</main>
