@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="UTF-8">
+	<title>TL: Write a Review</title>
+	<link rel="stylesheet" type="text/css" href="/css/style.css" />
+	<!-- Initializing js file -->
+	<script src="/javascript/get_geolocation.js"></script>
+</head>
+
+<body>
+	<div class="content_page_background"> 	<!-- create wrapper for write review page to structure background -->
+		<header> 	<!-- header for page when screen size is 1024 px-->
+			<img id="theLibLogo" src="/assets/theLibSmallLogo.svg" alt="theLibLogo"> 	<!-- logo image -->
+			<ul class="menu-left"> 	<!-- unordered list for left half of header; navigates to search or review pages -->
+				<li><a href="/">Search</a></li>
+				<li><a href="/submission/">Write a Review</a></li>
+			</ul>
+			<ul class="menu-right"> <!-- unordered list for right half of header; navigates to log in or sign up pages -->
+				<li><div class="button1"><a href="/login/">Log In</a></div></li>
+				<li><div class="button1"><a href="/registration/">Sign Up</a></div></li>
+			</ul>
+			<div class="dropdown"> <!-- header for page when screen size < 1024 px-->
+				<button class="button1">Menu &#x25BC;</button> <!-- Menu button that drops down to list of all pages-->
+				<div class="dropdown_content">
+					<div class="item"><a href="/">Search</a></div>
+					<div class="item"><a href="/submission/">Write a Review</a></div>
+					<div class="item"><a href="/login/">Log In</a></div>
+					<div class="item"><a href="/registration/">Sign Up</a></div>
+				</div>
+			</div> 
+		</header>
+
+		<main>
+			<!-- Page is divided into two columns: column 1 contains decorative images, column 2 contains review form-->
+			<div class="review_page_layout">
+				<!-- Column containing decorative image -->
+				<img id="bookStack" src="/assets/bookStack.jpg" alt="bookStack.jpg">
+				<!-- Column containg review form, which is divded into rows of prompts & answer boxes-->
+				<!-- When form is submitted, form will be validated based on patterns in HTML tags -->
+				<form name="review_container" action="" onsubmit="return validateForm()" method="post">
+					<h2>Rate &amp; Review </h2>
+					<!-- Each review category contains Prompt & answer box with sample input text -->
+					<div class="review_category">
+						<label>Library:<abbr title="This field is required">*</abbr></label> <!-- Field is required -->
+						<!-- User must type in at least 1 character to classify as a library name-->
+						<input type="text" placeholder="e.g. Thode Library" name="search" required minlength="1" title="Please enter a valid library">
+					</div>
+					<!-- New field where user can select button & lat and lng will be updated with user's current location-->
+					<div class="review_category">
+						<label>To get library location, either press button or enter it manually below:<abbr title="This field is required">*</abbr></label> <!-- Field is required -->
+						<!-- calls function getLocation() in js file -->
+						<button id="getLibLoc" onclick="getLocation()">Get library location</button>
+					</div>
+					<div class="review_category">
+						<label>Latitude:<abbr title="This field is required">*</abbr></label> <!-- Field is required -->
+						<!-- Regex pattern outlining what user must enter to constitute a latitude; adapted from https://stackoverflow.com/questions/3518504/regular-expression-for-matching-latitude-longitude-coordinates-->
+						<input type="text" id="latitude" placeholder="e.g. 43.261059" name="search" required pattern="^(\+|-)?(?:90(?:(?:\.0{1,20})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,20})?))$" title="Please enter a valid latitude"> 
+					</div>
+					<div class="review_category">
+						<label>Longitude:<abbr title="This field is required">*</abbr></label> <!-- Field is required -->
+						<!-- Regex pattern outlining what user must enter to constitute a longitude; adapted from https://stackoverflow.com/questions/3518504/regular-expression-for-matching-latitude-longitude-coordinates-->
+						<input type="text" id="longitude" placeholder="e.g. -79.922565" name="search" required pattern="^(\+|-)?(?:180(?:(?:\.0{1,20})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,20})?))$" title="Please enter a valid longitude">
+					</div>
+					<div class="review_category">
+						<label>Rate library:<abbr title="This field is required">*</abbr></label> <!-- Field is required -->
+						<!-- User selects radio of number from 1 to 5 -->
+						<div class="rating">
+							<span class="label radio"><input type="radio" name="rating" value="1" required name="title">1</span>
+							<span class="label radio"><input type="radio" name="rating" value="2" required name="title">2</span>
+							<span class="label radio"><input type="radio" name="rating" value="3" required name="title">3</span>
+							<span class="label radio"><input type="radio" name="rating" value="4" required name="title">4</span>
+							<span class="label radio"><input type="radio" name="rating" value="5" required name="title">5</span>
+						</div>
+					</div>
+					<!-- User can add image -->
+					<div class="review_category">
+						<label>Add images:</label>
+						<input type="file" name="file" id="file" class="inputfile"> <!-- Field is not required -->
+						<label for="file"><img id="camera" src="/assets/addImage.svg" alt="camera"></label>
+					</div>
+					<div class="review_category">
+						<label>Comments?</label> <!-- Field is not required -->
+						<input type="text" placeholder="" name="search">
+					</div>
+					<!-- Submit button -->
+					<button class="button button2">Submit</button>
+				</form>
+			</div>
+		</main>
+
+		<footer>
+			<div class="footer-left"> <!-- Left half of footer contains social media icons -->
+				<img class="socialMediaIcon" src="/assets/facebook.svg" alt="facebook">
+				<img class="socialMediaIcon" src="/assets/twitter.svg" alt="twitter">
+				<img class="socialMediaIcon" src="/assets/instagram.svg" alt="instagram">
+			</div>
+			<ul class="footer-right"> <!-- Right half of footer contains site information -->
+				<li>About</li>
+				<li>Contact</li>
+				<li>Copyright &#169; Marta Skreta designs</li>
+			</ul>
+		</footer>
+
+	</div>
+</body>
+</html>

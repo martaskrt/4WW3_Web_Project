@@ -2,14 +2,14 @@
 function formValidate(event){
 
    //When function is called, initialize all form elements to variables
-	let userForm = document.forms["registrationForm"];
-	let name = userForm[0].value;
-	let birthday = userForm[1].value;
-	let email = userForm[2].value;
-	let username = userForm[3].value;
-	let password = userForm[4].value;
-	let passwordReentered = userForm[5].value;
-	let checkBox = userForm[6].checked;
+   let userForm = document.forms["registrationForm"];
+   let name = userForm[0].value;
+   let birthday = userForm[1].value;
+   let email = userForm[2].value;
+   let username = userForm[3].value;
+   let password = userForm[4].value;
+   let passwordReentered = userForm[5].value;
+   let checkBox = userForm[6].checked;
 
    //NAME VALIDATION
    let regExpName = /^\w+\s\w+$/; // regular expression for entering name (two words separate by a space)
@@ -93,7 +93,7 @@ function formValidate(event){
       userForm[6].style.borderColor = "red";
       document.getElementById("errorUncheckedBox").style.display = "block";
       event.preventDefault(); //prevent any future events from happening (i.e. form submission)
-	} else {
+   } else {
       document.getElementById("errorUncheckedBox").style.display = "none";
       userForm[6].style.border = "none"; //if entered properly, remove red box
    }

@@ -610,6 +610,17 @@ form{
 	margin-bottom: -15px;
 }
 
+.errorPHP{
+	border-style: none;
+	color: red;
+	font-style: italic;
+	width: inherit;
+	font: 0.8em bookman old style;
+	margin-right: -160px;
+	width: 220px;
+	margin-bottom: -15px;
+}
+
 /* Format for input text in boxes where user has to fill out info */
 form input[type=text] {
 	padding: 6px;

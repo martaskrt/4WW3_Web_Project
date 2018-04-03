@@ -1,8 +1,8 @@
-Name: Marta Skreta
+CS 4WW3 Assignment 2
+Due: March 5, 2018 
+
+Name: MARTA SKRETA
 Student number: 001416801
-Course: CS 4WW3
 
-Completed Add-on task #1 for bonus
-
-Cs 4WW3 Assignment 1
-Due: Feb. 7, 2017
+URL of live website:
+https://skretam.cs4ww3.ca/
