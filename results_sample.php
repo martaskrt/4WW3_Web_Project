@@ -70,7 +70,7 @@ $posts = $get_the_posts->fetchAll();
 						foreach ($posts as $number=>$content){
 							$key_plus = $number + 1;
 							echo '<tr>'; //<!-- Row #2 -->
-							echo '<td><form><input type="hidden" name="search" value="' . $content["libraryName"] . '"><input type="submit" value="' . $key_plus . ". " . $content["libraryName"] . '"></form></td>'; //<!-- First column containing library name-->
+							echo '<td><form action="/results/sample/" method="post"><input type="hidden" name="search" value="' . $content["libraryName"] . '"><input type="submit" value="' . $key_plus . ". " . $content["libraryName"] . '"></form></td>'; //<!-- First column containing library name-->
 							echo '<td>'; //<!-- Second column containg average rating of library -->
 								echo '<img id="4.5stars" src="/assets/4.5stars.svg" alt="5stars">';
 								echo '<div id="rating_number">' . $content['rating'] . '</div></td>'; 

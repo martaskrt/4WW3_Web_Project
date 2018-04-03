@@ -2,11 +2,12 @@
 	if (!empty($_POST)){
 		$pdo = new PDO('mysql:host=localhost; dbname=marts_database', 'skretam','Philedelthia12!?');
 		$get_library = $pdo->prepare("SELECT libraryID, libraryName, rating FROM Library WHERE libraryName=?");
-		$get_library->execute($_POST['search']);
+		$get_library->execute([$_POST['search']]);
 		$library_info = $get_library->fetch();
-		$get_reviews = $pdo->prepare("SELECT libraryID, userID, rating, comments, userNAME FROM Review WHERE libraryID=? INNER JOIN User ON Review.userID = User.userID");
+		$get_reviews = $pdo->prepare("SELECT libraryID, Review.userID, rating, comments, userNAME FROM Review  INNER JOIN User ON Review.userID = User.userID WHERE libraryID=?");
 		$get_reviews->execute([$library_info['libraryID']]);
 		$reviews = $get_reviews->fetchAll();
+		echo $reviews[0];
 }
 ?>
 <!DOCTYPE html>
@@ -115,6 +116,7 @@
 						<!-- Row #2 -->
 						<?php
 						if(!empty($reviews)){
+							echo 'hello';
 							foreach($reviews as $content){
 							echo '<tr itemprop="review" itemscope itemtype="http://schema.org/Review">';
 							echo '<td>';
@@ -133,34 +135,6 @@
 						}
 						}
 							?>
-							<!-- Row #3 -->
-							<tr>
-								<td> <!-- First column containg user name & picture-->
-									<img class="userPic" src="/assets/userPic.svg" alt="userPic">
-									<div class="username">skretam</div>
-								</td>
-								<td> <!-- Second column containg user rating of library -->
-									<img class="rating_stars" src="/assets/5stars.svg" alt="5stars">
-									<div class="rating">5/5</div>
-								</td>
-								<td> <!-- Third column containg user comments about -->
-									<div class="comments">It's often hard to get a seat because so many people come here, but if I manage to get one, the atmosphere here is pretty cool. </div>
-								</td>
-							</tr>
-							<!-- Row #4 -->
-							<tr>
-								<td> <!-- First column containg user name & picture-->
-									<img class="userPic" src="/assets/userPic.svg" alt="userPic">
-									<div class="username">skretam</div>
-								</td>
-								<td> <!-- Second column containg user rating of library -->
-									<img src="/assets/5stars.svg" alt="5stars">
-									<div class="rating">5/5</div>
-								</td>
-								<td> <!-- Third column containg user comments about -->
-									<div class="comments">The layout of the library is pretty weird...why you have to walk up a flight of stairs and then down a flight of stairs to get to the main floor of the library? </div>
-								</td>
-							</tr>
 						</table>
 					</div>
 				</div>
