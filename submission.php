@@ -1,7 +1,7 @@
 <?php
 session_start();
 require 'vendor/autoload.php';
-use Aws\S3\S3Client
+use Aws\S3\S3Client;
 use Aws\Exception\AwsException;
 $pdo = new PDO('mysql:host=localhost; dbname=marts_database', 'skretam','Philedelthia12!?');
 $totalErrors = array();
