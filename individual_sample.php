@@ -69,7 +69,14 @@ if (!($_SERVER['REQUEST_METHOD'] === 'POST')){
 						<!-- Buttons in banner that quickly allow user to return to search results or write review -->
 						<div class="buttons">
 							<div class="button2"><a href="/results/">Go back</a></div>
-							<div class="button2"><a href="/submission/">Write review</a></div>
+							<div class="button2">
+								<form action="/submission/" method="post">
+									<?php
+									echo '<input type="hidden" name="library_given" value="'. $library_info['library_name'] .'">';
+									?>
+									<input type="submit" value="Write review">
+								</form>
+							</div>
 						</div>
 						<!-- Image of map containing location of library -->
 						<div itemscope itemtype="http://schema.org/Place"> <!-- data relating to location of product (library) -->

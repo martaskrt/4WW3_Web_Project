@@ -3,62 +3,68 @@ session_start();
 require 'vendor/autoload.php';
 use Aws\S3\S3Client;
 use Aws\Exception\AwsException;
+$lib_name = "";
 $pdo = new PDO('mysql:host=localhost; dbname=marts_database', 'skretam','Philedelthia12!?');
-$totalErrors = array();
-if (!isset($_SESSION['log_in']) || $_SESSION['log_in'] == False){
-	header('Location: https://skretam.cs4ww3.ca/login/');
+if (isset($_POST['library_given'])){
+	$lib_name = $_POST['library_given'];
 }
-if (!empty($_POST)){
-	if(!isset($_POST['library'])){
-		$error = "Library was not set properly!";
-		array_push($totalErrors, $error);
+else {
+	$totalErrors = array();
+	if (!isset($_SESSION['log_in']) || $_SESSION['log_in'] == False){
+		header('Location: https://skretam.cs4ww3.ca/login/');
 	}
-	if(!isset($_POST['latitude'])){
-		$error = "Latitude was not set properly!";
-		array_push($totalErrors, $error);
-	}
-	if(!isset($_POST['longitude'])){
-		$error = "Longitude was not set properly!";
-		array_push($totalErrors, $error);
-	}
-	if(!isset($_FILES['file']['name'])){
-		$error = "No image was uploaded!";
-		array_push($totalErrors, $error);
-	}
-	echo $totalErrors[0];
-	if(empty($totalErrors)){
-		$library_query = $pdo->prepare("SELECT libraryID,libraryName FROM Library WHERE libraryName=?");
-		$library_query->execute([$_POST['library']]);
-		$library_Result = $library_query->fetch();
-		if (empty($library_Result)){
-			$create_library = $pdo->prepare("INSERT INTO Library (libraryID, libraryName, rating, images) VALUES (?,?,?,?)");
-			$last_library = $pdo->prepare("SELECT max(libraryID) FROM Library");
-			$last_library->execute();
-			$last_library_result = $last_library->fetch();
-			$last_libraryID = 1 + (int) $last_library_result[0];
-			$rating = "?/5";
-			$create_library->execute([$last_libraryID, $_POST['library'], $rating, $_FILES['file']['name']]);
-
-			$S3_API = new S3Client([
-				'region' => 'us-east-2',
-				'version' => '2006-03-01',
-				'credentials' => array(
-					'key' => 'AKIAIWNTSLBKH6WEQTOA',
-					'secret' => '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')
-			]);
-			try {
-				$S3_API->putObject([
-					'Bucket' => 'marta-skreta-image-bucket',
-					'Key' => $_FILES['file']['name'],
-					'SourceFile' => $_FILES['file']['tmp_name']]);
-			}
-			catch (S3Exception $error){
-				// I have to do something with this error!
-			}
+	if (!empty($_POST)){
+		if(!isset($_POST['library'])){
+			$error = "Library was not set properly!";
+			array_push($totalErrors, $error);
 		}
-		else {
-			$submit_review = $pdo->prepare("INSERT INTO Review (libraryID, userID, rating, comments) VALUES (?,?,?,?)");
-			$submit_review->execute([$library_Result['libraryID'], $_SESSION['userID'], $_POST['rating'],$_POST['comments']]);
+		if(!isset($_POST['latitude'])){
+			$error = "Latitude was not set properly!";
+			array_push($totalErrors, $error);
+		}
+		if(!isset($_POST['longitude'])){
+			$error = "Longitude was not set properly!";
+			array_push($totalErrors, $error);
+		}
+		if(!isset($_FILES['file']['name'])){
+			$error = "No image was uploaded!";
+			array_push($totalErrors, $error);
+		}
+		echo $totalErrors[0];
+		if(empty($totalErrors)){
+			$library_query = $pdo->prepare("SELECT libraryID,libraryName FROM Library WHERE libraryName=?");
+			$library_query->execute([$_POST['library']]);
+			$library_Result = $library_query->fetch();
+			if (empty($library_Result)){
+				$create_library = $pdo->prepare("INSERT INTO Library (libraryID, libraryName, rating, images) VALUES (?,?,?,?)");
+				$last_library = $pdo->prepare("SELECT max(libraryID) FROM Library");
+				$last_library->execute();
+				$last_library_result = $last_library->fetch();
+				$last_libraryID = 1 + (int) $last_library_result[0];
+				$rating = "?/5";
+				$create_library->execute([$last_libraryID, $_POST['library'], $rating, $_FILES['file']['name']]);
+
+				$S3_API = new S3Client([
+					'region' => 'us-east-2',
+					'version' => '2006-03-01',
+					'credentials' => array(
+						'key' => 'AKIAIWNTSLBKH6WEQTOA',
+						'secret' => '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')
+				]);
+				try {
+					$S3_API->putObject([
+						'Bucket' => 'marta-skreta-image-bucket',
+						'Key' => $_FILES['file']['name'],
+						'SourceFile' => $_FILES['file']['tmp_name']]);
+				}
+				catch (S3Exception $error){
+				// I have to do something with this error!
+				}
+			}
+			else {
+				$submit_review = $pdo->prepare("INSERT INTO Review (libraryID, userID, rating, comments) VALUES (?,?,?,?)");
+				$submit_review->execute([$library_Result['libraryID'], $_SESSION['userID'], $_POST['rating'],$_POST['comments']]);
+			}
 		}
 	}
 }
@@ -92,7 +98,7 @@ if (!empty($_POST)){
 					<div class="review_category">
 						<label>Library:<abbr title="This field is required">*</abbr></label> <!-- Field is required -->
 						<!-- User must type in at least 1 character to classify as a library name-->
-						<input type="text" placeholder="e.g. Thode Library" name="library" required minlength="1" title="Please enter a valid library">
+						<input type="text" placeholder="e.g. Thode Library" name="library" required minlength="1" title="Please enter a valid library" value="<?php echo $lib_name ?>">
 					</div>
 					<!-- New field where user can select button & lat and lng will be updated with user's current location-->
 					<div class="review_category">
