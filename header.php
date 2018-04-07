@@ -4,12 +4,12 @@
 				<li><a href="/">Search</a></li>
 				<li><a href="/submission/">Write a Review</a></li>
 			</ul>
-			<ul class="menu-right"> <!-- unordered list for right half of header; navigates to log in or sign up pages -->
+			<ul class="menu-right" style="display:flex"> <!-- unordered list for right half of header; navigates to log in or sign up pages -->
 				<li><div class="button1"><a href="/login/">Log In</a></div></li>
 				<li><div class="button1"><a href="/registration/">Sign Up</a></div></li>
 				<?php
 				if (!empty($_SESSION['user'])){
-					echo '<li><h1>'. $_SESSION['user'] .'</h1></li>';
+					echo '<li><h1>Logged in as: '. $_SESSION['user'] .'</h1></li>';
 				}
 				?>
 			</ul>
