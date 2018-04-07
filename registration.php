@@ -59,10 +59,10 @@ if (empty($totalErrors)){
 	$getLastUserID = $pdo->prepare("SELECT max(userID) FROM User");
 	$getLastUserID->execute();
 	$lastUserID = $getLastUserID->fetch();
-	$fullUID = 1 + (int) $lastUserID[0]
+	$fullUID = 1 + (int) $lastUserID[0];
 	$register_query = $pdo->prepare("INSERT INTO User (userID, userName, userPass, userSalt, userEmail, userBirthday)
 		VALUES (?,?,?,?,?,?)");
-	$register_query->execute([$fullUID,$_POST['uanme'],$hashed_pw,$passwordSalt, $_POST['email'],$_POST['bday']]);
+	$register_query->execute([$fullUID,$_POST['uname'],$hashed_pw,$passwordSalt, $_POST['email'],$_POST['bday']]);
 }
 ?>
 
@@ -107,7 +107,7 @@ if (empty($totalErrors)){
 				<!-- Column containg sign up form, which is divded into rows of prompts-->
 				<!-- function is located in js file called registration_validator -->
 				<script src="/javascript/registration_validator.js"></script>
-				<form name="registrationForm" action="/registration" method="post" onsubmit="formValidate(event)" novalidate>
+				<form name="registrationForm" action="/registration/" method="post" onsubmit="formValidate(event)" novalidate>
 					<!-- Each row consists of line with sample input text -->
 					<input id="name" type="text" placeholder="NAME" name="name">
 					<p id="errorName">Please enter name in the format: First Last</p>
