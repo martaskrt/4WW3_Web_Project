@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!empty($_POST)){
-	if(isset($_POST['logMeOut'] && $_POST['logMeOut'] == 'true')){
+	if(isset($_POST['logMeOut']) && $_POST['logMeOut'] == 'true'){
 		$_SESSION['log_in'] = False;
 	}
 	else {
