@@ -5,9 +5,13 @@
 				<li><a href="/submission/">Write a Review</a></li>
 			</ul>
 			<ul class="menu-right" style="display:flex"> <!-- unordered list for right half of header; navigates to log in or sign up pages -->
-				<li><div class="button1"><a href="/login/">Log In</a></div></li>
-				<li><div class="button1"><a href="/registration/">Sign Up</a></div></li>
 				<?php
+				$log_status = "Log In";
+				if (isset($_SESSION['log_in']) && $_SESSION['log_in'] == True){
+					$log_status = "Log Out";
+				}
+				echo '<li><div class="button1"><a href="/login/">'.$log_status.'</a></div></li>';
+				echo '<li><div class="button1"><a href="/registration/">Sign Up</a></div></li>';
 				if (!empty($_SESSION['user'])){
 					echo '<p style="font-size: 9px;color: white;">Logged in as: '. $_SESSION['user'] .'<p>';
 				}
