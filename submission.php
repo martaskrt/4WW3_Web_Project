@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['log_in']) || $_SESSION['log_in'] == False){
-	header('Location: https://skretam.cs4ww3.ca/login/')
+	header('Location: https://skretam.cs4ww3.ca/login/');
 }
 if (!empty($_POST)){
 		

@@ -9,7 +9,7 @@
 				<li><div class="button1"><a href="/registration/">Sign Up</a></div></li>
 				<?php
 				if (!empty($_SESSION['user'])){
-					echo '<p>Logged in as: '. $_SESSION['user'] .'<p>';
+					echo '<p style="font-size: 9px;color: white;">Logged in as: '. $_SESSION['user'] .'<p>';
 				}
 				?>
 			</ul>
