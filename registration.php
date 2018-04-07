@@ -55,13 +55,13 @@ function checkInput($input) {
 if (empty($totalErrors)){
 	$pdo = new PDO('mysql:host=localhost; dbname=marts_database', 'skretam','Philedelthia12!?');
 	$passwordSalt = bin2hex($_POST['pass']);
-	$register_query = $pdo->prepare("INSERT INTO User (userID, userName, userPass, userSalt, userEmail, userBirthday)
-		VALUES (?,?,?,?,?,?)");
 	$hashed_pw = hash('sha256', $_POST['pass'] . $passwordSalt);
 	$getLastUserID = $pdo->prepare("SELECT max(userID) FROM User");
 	$getLastUserID->execute();
 	$lastUserID = $getLastUserID->fetch();
 	$fullUID = 1 + (int) $lastUserID[0]
+	$register_query = $pdo->prepare("INSERT INTO User (userID, userName, userPass, userSalt, userEmail, userBirthday)
+		VALUES (?,?,?,?,?,?)");
 	$register_query->execute([$fullUID,$_POST['uanme'],$hashed_pw,$passwordSalt, $_POST['email'],$_POST['bday']]);
 }
 ?>
