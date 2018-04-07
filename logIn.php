@@ -12,7 +12,6 @@ if (!empty($_POST)){
 			$get_credentials = $pdo->prepare("SELECT userSalt, userPass, userName, userID FROM User WHERE userName=?");
 			$get_credentials->execute([$_POST['user']]);
 			$user_details = $get_credentials->fetch();
-			echo $user_details['userName'];
 			$hashed_pw = hash('sha256', $_POST['pass'] . $user_details['userSalt']);
 			if ($hashed_pw == $user_details['userPass']){
 				$_SESSION['log_in'] = True;
