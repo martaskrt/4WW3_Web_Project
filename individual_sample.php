@@ -3,6 +3,7 @@ session_start();
 if (!($_SERVER['REQUEST_METHOD'] === 'POST')){
 	header('Location: https://skretam.cs4ww3.ca/');
 }
+$library_info;
 	if (!empty($_POST)){
 		$pdo = new PDO('mysql:host=localhost; dbname=marts_database', 'skretam','Philedelthia12!?');
 		$get_library = $pdo->prepare("SELECT libraryID, libraryName, rating FROM Library WHERE libraryName=?");
@@ -10,8 +11,8 @@ if (!($_SERVER['REQUEST_METHOD'] === 'POST')){
 		$library_info = $get_library->fetch();
 		$get_reviews = $pdo->prepare("SELECT libraryID, Review.userID, rating, comments, userNAME FROM Review  INNER JOIN User ON Review.userID = User.userID WHERE libraryID=?");
 		$get_reviews->execute([$library_info['libraryID']]);
+		
 		$reviews = $get_reviews->fetchAll();
-		echo $reviews[0];
 }
 ?>
 <!DOCTYPE html>
@@ -53,7 +54,9 @@ if (!($_SERVER['REQUEST_METHOD'] === 'POST')){
 					<div class="summary_library_query">
 						<div class="library_details">
 							<!-- Information about the library -->
-							<div id="library_name"> <span itemprop="name"> <?php echo $library_info['library_name'] ?> </span> </div>
+							<?php
+							echo '<div id="library_name"> <span itemprop="name">'. $library_info['libraryName'] .'</span> </div>';
+							?>
 							<div class="library_time">Hours of operation:</div>
 							<div class="library_time">Mon-Thurs 8:45am-10:45pm</div>
 							<div class="library_time">Fri 8:45am-9:45pm</div>
@@ -72,7 +75,7 @@ if (!($_SERVER['REQUEST_METHOD'] === 'POST')){
 							<div class="button2">
 								<form action="/submission/" method="post">
 									<?php
-									echo '<input type="hidden" name="library_given" value="'. $library_info['library_name'] .'">';
+									echo '<input type="hidden" name="library_given" value="'. $library_info['libraryName'] .'">';
 									?>
 									<input type="submit" value="Write review">
 								</form>

@@ -8,7 +8,6 @@ $pdo = new PDO('mysql:host=localhost; dbname=marts_database', 'skretam','Philede
 if (isset($_POST['library_given'])){
 	$lib_name = $_POST['library_given'];
 }
-else {
 	$totalErrors = array();
 	if (!isset($_SESSION['log_in']) || $_SESSION['log_in'] == False){
 		header('Location: https://skretam.cs4ww3.ca/login/');
@@ -67,7 +66,6 @@ else {
 			}
 		}
 	}
-}
 ?>
 <!DOCTYPE html>
 <html>
@@ -98,7 +96,7 @@ else {
 					<div class="review_category">
 						<label>Library:<abbr title="This field is required">*</abbr></label> <!-- Field is required -->
 						<!-- User must type in at least 1 character to classify as a library name-->
-						<input type="text" placeholder="e.g. Thode Library" name="library" required minlength="1" title="Please enter a valid library" value="<?php echo $lib_name ?>">
+						<input type="text" placeholder="e.g. Thode Library" name="library" required minlength="1" title="Please enter a valid library" value="<?php echo $lib_name; ?>">
 					</div>
 					<!-- New field where user can select button & lat and lng will be updated with user's current location-->
 					<div class="review_category">
