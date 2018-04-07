@@ -1,4 +1,5 @@
 <?php
+session_start();
 if (!empty($_POST)){
 $pdo = new PDO('mysql:host=localhost; dbname=marts_database', 'skretam','Philedelthia12!?');
 $template = "%" . $_POST["search"] . "%";
