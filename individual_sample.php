@@ -1,5 +1,8 @@
 <?php
 session_start();
+if (!($_SERVER['REQUEST_METHOD'] === 'POST')){
+	header('Location: https://skretam.cs4ww3.ca/');
+}
 	if (!empty($_POST)){
 		$pdo = new PDO('mysql:host=localhost; dbname=marts_database', 'skretam','Philedelthia12!?');
 		$get_library = $pdo->prepare("SELECT libraryID, libraryName, rating FROM Library WHERE libraryName=?");
@@ -50,8 +53,7 @@ session_start();
 					<div class="summary_library_query">
 						<div class="library_details">
 							<!-- Information about the library -->
-							<div id="library_name"> <span itemprop="name"> Health Sciences Library </span> </div>
-							<div id="library_address">1280 Main St. W.</div>
+							<div id="library_name"> <span itemprop="name"> <?php echo $library_info['library_name'] ?> </span> </div>
 							<div class="library_time">Hours of operation:</div>
 							<div class="library_time">Mon-Thurs 8:45am-10:45pm</div>
 							<div class="library_time">Fri 8:45am-9:45pm</div>
