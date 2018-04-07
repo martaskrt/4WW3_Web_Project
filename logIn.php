@@ -10,6 +10,7 @@ if (!empty($_POST)){
 			$get_credentials = $pdo->prepare("SELECT userSalt, userPass, userName, userID FROM User WHERE userName=?");
 			$get_credentials->execute([$_POST['user']]);
 			$user_details = $get_credentials->fetch();
+			echo $user_details['userName'];
 			$hashed_pw = hash('sha256', $_POST['pass'] . $user_details['userSalt']);
 			if ($hashed_pw == $user_details['userPass']){
 				$_SESSION['log_in'] = True;
@@ -31,7 +32,7 @@ if (!empty($_POST)){
 <body>
 	<div class="content_page_background"> 	<!-- create wrapper for log in to structure background -->
 		<?php 
-		include '/header.php'
+		include 'header.php'
 		?>
 		<main>
 			<!-- Page is divided into two columns: column 1 contains decorative images, column 2 contains log in form-->

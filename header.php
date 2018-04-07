@@ -9,7 +9,7 @@
 				<li><div class="button1"><a href="/registration/">Sign Up</a></div></li>
 				<?php
 				if (!empty($_SESSION['user'])){
-					echo '<li><h1>'. $_SESSION['user'] .'</h1></li>'
+					echo '<li><h1>'. $_SESSION['user'] .'</h1></li>';
 				}
 				?>
 			</ul>
