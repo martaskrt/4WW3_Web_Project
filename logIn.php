@@ -1,9 +1,8 @@
 <?php
 session_start();
-
 if (!empty($_POST)){
 	if(isset($_POST['logMeOut'])){
-
+		
 	}
 	else {
 		if (!empty($_POST['user']) && !empty($_POST['pass'])){
@@ -31,27 +30,9 @@ if (!empty($_POST)){
 </head>
 <body>
 	<div class="content_page_background"> 	<!-- create wrapper for log in to structure background -->
-		<header> 	<!-- header for page when screen size is 1024 px-->
-			<img id="theLibLogo" src="/assets/theLibSmallLogo.svg" alt="theLibLogo"> 	<!-- logo image -->
-			<ul class="menu-left"> 	<!-- unordered list for left half of header; navigates to search or review pages -->
-				<li><a href="/">Search</a></li>
-				<li><a href="/submission/">Write a Review</a></li>
-			</ul>
-			<ul class="menu-right"> <!-- unordered list for right half of header; navigates to log in or sign up pages -->
-				<li><div class="button1"><a href="/login/">Log In</a></div></li>
-				<li><div class="button1"><a href="/registration/">Sign Up</a></div></li>
-			</ul>
-			<div class="dropdown"> <!-- header for page when screen size < 1024 px-->
-				<button class="button1">Menu &#x25BC;</button> <!-- Menu button that drops down to list of all pages-->
-				<div class="dropdown_content">
-					<div class="item"><a href="/">Search</a></div>
-					<div class="item"><a href="/submission/">Write a Review</a></div>
-					<div class="item"><a href="/login/">Log In</a></div>
-					<div class="item"><a href="/registration/">Sign Up</a></div>
-				</div>
-			</div> 
-		</header>
-
+		<?php 
+		include '/header.php'
+		?>
 		<main>
 			<!-- Page is divided into two columns: column 1 contains decorative images, column 2 contains log in form-->
 			<div class="account_content">
