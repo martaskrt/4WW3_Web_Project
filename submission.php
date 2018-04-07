@@ -21,21 +21,23 @@ if (!empty($_POST)){
 		$error = "Longitude was not set properly!";
 		array_push($totalErrors, $error);
 	}
-	if(!isset($_FILES['file'])){
+	if(!isset($_FILES['file']['name'])){
 		$error = "No image was uploaded!";
 		array_push($totalErrors, $error);
 	}
+	echo $totalErrors[0];
 	if(empty($totalErrors)){
-		$library_query = $pdo->prepare("SELECT libraryID FROM Library WHERE library=?");
-		$library_query->execute($_POST['library']);
+		$library_query = $pdo->prepare("SELECT libraryID,libraryName FROM Library WHERE libraryName=?");
+		$library_query->execute([$_POST['library']]);
 		$library_Result = $library_query->fetch();
 		if (empty($library_Result)){
-			$create_library = $pdo->prepare("INSERT INTO Library (libraryID, libraryName, rating, images) (?,?,?)");
+			$create_library = $pdo->prepare("INSERT INTO Library (libraryID, libraryName, rating, images) VALUES (?,?,?,?)");
 			$last_library = $pdo->prepare("SELECT max(libraryID) FROM Library");
 			$last_library->execute();
 			$last_library_result = $last_library->fetch();
 			$last_libraryID = 1 + (int) $last_library_result[0];
-			$create_library->execute([$last_libraryID, $_POST['library'], '?/5', $_FILES['file']['name']]);
+			$rating = "?/5";
+			$create_library->execute([$last_libraryID, $_POST['library'], $rating, $_FILES['file']['name']]);
 
 			$S3_API = new S3Client([
 				'region' => 'us-east-2',
@@ -84,7 +86,7 @@ if (!empty($_POST)){
 				<img id="bookStack" src="/assets/bookStack.jpg" alt="bookStack.jpg">
 				<!-- Column containg review form, which is divded into rows of prompts & answer boxes-->
 				<!-- When form is submitted, form will be validated based on patterns in HTML tags -->
-				<form name="review_container" action="/submission/" method="post" onsubmit="return validateForm()" method="post">
+				<form enctype="multipart/form-data" name="review_container" action="/submission/" method="post" onsubmit="return validateForm()" method="post">
 					<h2>Rate &amp; Review </h2>
 					<!-- Each review category contains Prompt & answer box with sample input text -->
 					<div class="review_category">
