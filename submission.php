@@ -56,7 +56,7 @@ if (!empty($_POST)){
 		}
 		else {
 			$submit_review = $pdo->prepare("INSERT INTO Review (libraryID, userID, rating, comments) VALUES (?,?,?,?)");
-			$submit_review->execute([$library_Result['libraryID'], $_SESSION['userID'], $_POST[''],$_POST['comments']]);
+			$submit_review->execute([$library_Result['libraryID'], $_SESSION['userID'], $_POST['rating'],$_POST['comments']]);
 		}
 	}
 }
