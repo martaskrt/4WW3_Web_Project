@@ -47,8 +47,8 @@ if (isset($_POST['library_given'])){
 					'region' => 'us-east-2',
 					'version' => '2006-03-01',
 					'credentials' => array(
-						'key' => 'AKIAIWNTSLBKH6WEQTOA',
-						'secret' => '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')
+						'key' => ,
+						'secret' => )
 				]);
 				try {
 					$S3_API->putObject([
