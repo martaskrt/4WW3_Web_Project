@@ -3,6 +3,8 @@ session_start();
 if (!empty($_POST)){
 	if(isset($_POST['logMeOut']) && $_POST['logMeOut'] == 'true'){
 		$_SESSION['log_in'] = False;
+		$_SESSION['user'] = "";
+		$_SESSION['userID'] = "";
 	}
 	else {
 		if (!empty($_POST['user']) && !empty($_POST['pass'])){
