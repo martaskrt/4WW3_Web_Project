@@ -1,10 +1,64 @@
 <?php
 session_start();
+require 'vendor/autoload.php';
+use Aws\S3\S3Client
+use Aws\Exception\AwsException;
+$pdo = new PDO('mysql:host=localhost; dbname=marts_database', 'skretam','Philedelthia12!?');
+$totalErrors = array();
 if (!isset($_SESSION['log_in']) || $_SESSION['log_in'] == False){
 	header('Location: https://skretam.cs4ww3.ca/login/');
 }
 if (!empty($_POST)){
-		
+	if(!isset($_POST['library'])){
+		$error = "Library was not set properly!";
+		array_push($totalErrors, $error);
+	}
+	if(!isset($_POST['latitude'])){
+		$error = "Latitude was not set properly!";
+		array_push($totalErrors, $error);
+	}
+	if(!isset($_POST['longitude'])){
+		$error = "Longitude was not set properly!";
+		array_push($totalErrors, $error);
+	}
+	if(!isset($_FILES['file'])){
+		$error = "No image was uploaded!";
+		array_push($totalErrors, $error);
+	}
+	if(empty($totalErrors)){
+		$library_query = $pdo->prepare("SELECT libraryID FROM Library WHERE library=?");
+		$library_query->execute($_POST['library']);
+		$library_Result = $library_query->fetch();
+		if (empty($library_Result)){
+			$create_library = $pdo->prepare("INSERT INTO Library (libraryID, libraryName, rating, images) (?,?,?)");
+			$last_library = $pdo->prepare("SELECT max(libraryID) FROM Library");
+			$last_library->execute();
+			$last_library_result = $last_library->fetch();
+			$last_libraryID = 1 + (int) $last_library_result[0];
+			$create_library->execute([$last_libraryID, $_POST['library'], '?/5', $_FILES['file']['name']]);
+
+			$S3_API = new S3Client([
+				'region' => 'us-east-2',
+				'version' => '2006-03-01',
+				'credentials' => array(
+					'key' => 'AKIAIWNTSLBKH6WEQTOA',
+					'secret' => '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')
+			]);
+			try {
+				$S3_API->putObject([
+					'Bucket' => 'marta-skreta-image-bucket',
+					'Key' => $_FILES['file']['name'],
+					'SourceFile' => $_FILES['file']['tmp_name']]);
+			}
+			catch (S3Exception $error){
+				// I have to do something with this error!
+			}
+		}
+		else {
+			$submit_review = $pdo->prepare("INSERT INTO Review (libraryID, userID, rating, comments) VALUES (?,?,?,?)");
+			$submit_review->execute([$library_Result['libraryID'], $_SESSION['userID'], $_POST[''],$_POST['comments']]);
+		}
+	}
 }
 ?>
 <!DOCTYPE html>
@@ -73,7 +127,7 @@ if (!empty($_POST)){
 					</div>
 					<div class="review_category">
 						<label>Comments?</label> <!-- Field is not required -->
-						<input type="text" placeholder="" name="search">
+						<input type="text" placeholder="" name="comments">
 					</div>
 					<!-- Submit button -->
 					<button class="button button2">Submit</button>
