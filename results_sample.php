@@ -6,7 +6,7 @@ if (!($_SERVER['REQUEST_METHOD'] === 'POST')){
 if (!empty($_POST)){
 $pdo = new PDO('mysql:host=localhost; dbname=marts_database', 'skretam','Philedelthia12!?');
 $template = "%" . $_POST["search"] . "%";
-$get_the_posts = $pdo->prepare("SELECT libraryName, rating FROM Library WHERE libraryName LIKE ?");
+$get_the_posts = $pdo->prepare("SELECT libraryName, rating, latitude, longitude FROM Library WHERE libraryName LIKE ?");
 $get_the_posts->execute([$template]);
 $posts = $get_the_posts->fetchAll();
 }
