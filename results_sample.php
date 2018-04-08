@@ -3,6 +3,7 @@ session_start();
 if (!($_SERVER['REQUEST_METHOD'] === 'POST')){
 	header('Location: https://skretam.cs4ww3.ca/');
 }
+echo $_POST['rating'];
 if (!empty($_POST)){
 $pdo = new PDO('mysql:host=localhost; dbname=marts_database', 'skretam','Philedelthia12!?');
 $template = "%" . $_POST["search"] . "%";
