@@ -29,8 +29,8 @@
 		setMarkers(map);
 
 	}
-	let boundings = new google.maps.LatLngBounds();
 	function setMarkers(map){
+		let boundings = new google.maps.LatLngBounds();
 		//for each item in locations array
 		for(i = 0; i < locations.length; i++){
 			//create new info window with contect from content array
@@ -55,8 +55,9 @@
 				this.infowindow.open(map, this);
 			});
 		}
+		map.fitBounds(boundings);
 	}
-	map.fitBounds(boundings);
+	
 	function hideAllInfoWindows(map) {
 		//for each marker in markers array, close window
 		markers.forEach(function(marker) {
