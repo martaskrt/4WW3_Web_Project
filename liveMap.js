@@ -1,6 +1,5 @@
   	//Initializing location of center of map
 	var myLatLng = {lat: 43.2635, lng: -79.9180};
-
 	//Initializing library locations array
 	var locations = [];
 	for (let library of JSON.parse(sql_global)){
@@ -30,7 +29,7 @@
 		setMarkers(map);
 
 	}
-
+	let boundings = new google.maps.LatLngBounds();
 	function setMarkers(map){
 		//for each item in locations array
 		for(i = 0; i < locations.length; i++){
@@ -41,12 +40,12 @@
 			});
 			//create new marker on map objext with locations from locations aray
 			var marker = new google.maps.Marker({
-				position: {lat: locations[i][1], lng: locations[i][2]},
+				position: {lat: parseFloat(locations[i][1]), lng: parseFloat(locations[i][2])},
 				map: map,
 				title: locations[i][0],
 				infowindow: infoWindow
 			});
-
+			boundings.extend(marker.getPosition());
 			//add markers to array, which will be used for closing windows
 			markers.push(marker);
 
@@ -57,7 +56,7 @@
 			});
 		}
 	}
-
+	map.fitBounds(boundings);
 	function hideAllInfoWindows(map) {
 		//for each marker in markers array, close window
 		markers.forEach(function(marker) {
