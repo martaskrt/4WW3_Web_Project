@@ -2,11 +2,7 @@
 	var myLatLng = {lat: 43.2635, lng: -79.9180};
 
 	//Initializing library locations array
-	var locations = [
-	['Health Sciences Library', 43.2602, -79.9183],
-	['Thode Library', 43.2611, -79.9225],
-	['Mills Library', 43.2627, -79.9177],
-	];
+	var locations = [];
 	for (let library of JSON.parse(sql_global)){
 		locations.push([
 			library.libraryName, 
