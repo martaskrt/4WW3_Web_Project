@@ -85,6 +85,7 @@ $library_info;
 						<div itemscope itemtype="http://schema.org/Place"> <!-- data relating to location of product (library) -->
 							<!-- Live map containing location of HSL -->
 							<div id="hslMap"></div>
+							<script type="text/javascript"> var sql_global = '<?php echo json_encode($library_info); ?>'; </script>
 							<!-- Initialize js file contiang library map -->
 	   						<script src="/javascript/hslMap.js"></script>
 	   						<!-- Google Maps key -->

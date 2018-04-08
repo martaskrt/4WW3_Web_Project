@@ -37,6 +37,7 @@ $posts = $get_the_posts->fetchAll();
 						<!-- Live map containing location of all library McMaster -->
 	    				<div id="map"></div>
 	    				<!-- Initialize js file contiang library map -->
+	    				<script type="text/javascript"> var sql_global = '<?php echo json_encode($posts); ?>'; </script>
 	   					<script src="/javascript/liveMap.js"></script>
 	   					<!-- Google key for map -->
 					    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAh7w4XEe9aVCbSMDBMGBWTEI7hGIqFfHA&callback=initMap"
