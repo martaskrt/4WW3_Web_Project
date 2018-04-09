@@ -16,11 +16,16 @@ $library_info;
 		}
 		else {
 			$pdo = new PDO('mysql:host=localhost; dbname=marts_database', 'skretam','Philedelthia12!?');
-			$post_review = $pdo->prepare("INSERT INTO Review (comments, rating, userID, libraryID) VALUES (?,?,?,?)");
+			$finalID = $pdo->prepare("SELECT max(reviewID) from Review");
+			$finalID->execute();
+			$LAST = $finalID->fetch();
+			$LPO = 1 + (int) $LAST[0];
+			$post_review = $pdo->prepare("INSERT INTO Review (reviewID, comments, rating, userID, libraryID) VALUES (?,?,?,?,?)");
 			$get_libraryID = $pdo->prepare("SELECT libraryID FROM Library WHERE libraryName=?");
-			$get_library->execute([$_POST['search']]);
-			$library_info = $get_library->fetch();
-			$post_review->execute([$_POST['review'],$_POST['rating'],$_SESSION['id'],$library_info['libraryID']]);
+			$get_libraryID->execute([$_POST['search']]);
+			$library_info = $get_libraryID->fetch();
+			echo $_SESSION['id'];
+			$post_review->execute([$LPO, $_POST['review'],$_POST['rating'],$_SESSION['userID'],$library_info['libraryID']]);
 		}
 }
 ?>
