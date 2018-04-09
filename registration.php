@@ -29,6 +29,16 @@ if (!empty($_POST)) {
     $unameError = "Please enter a valid username (must contain at least 6 characters)";
     array_push($totalErrors, $unameError);
   } 
+  else {
+	$pdo = new PDO('mysql:host=localhost; dbname=marts_database', 'skretam','Philedelthia12!?');
+	$checkUN = $pdo->prepare("SELECT userName FROM User WHERE userName=?");
+	$checkUN->execute([$_POST["uname"]]);
+	$UNAME = $checkUN->fetch();
+	if (!empty($UNAME)){		
+    		$unameError = "Username has already been taken!";
+    		array_push($totalErrors, $unameError);
+	}
+}
 
   $pass = checkInput($_POST["pass"]);
   if (!preg_match("/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/", $pass)) {
@@ -89,31 +99,39 @@ if (empty($totalErrors)){
 				<!-- Column containg sign up form, which is divded into rows of prompts-->
 				<!-- function is located in js file called registration_validator -->
 				<script src="/javascript/registration_validator.js"></script>
-				<form name="registrationForm" action="/registration/" method="post" onsubmit="formValidate(event)" novalidate>
-					<!-- Each row consists of line with sample input text -->
-					<input id="name" type="text" placeholder="NAME" name="name">
-					<p id="errorName">Please enter name in the format: First Last</p>
-					<span class="errorPHP"><?php echo $nameError;?></span>
-					<div id="birthday">BIRTHDAY</div> <input type="date" name="bday">
-					<p id="errorBirthday">Please enter birthday in the format: Year-Month-Date</p>
-					<span class="errorPHP"><?php echo $bdayError;?></span>
-					<input type="email" placeholder="E-MAIL" id="email" name="email">
-					<p id="errorEmail">Please enter a valid email</p>
-					<span class="errorPHP"><?php echo $emailError;?></span>
-					<input type="text" placeholder="USERNAME" id="uname" name="uname">
-					<p id="errorUserName">Please enter a valid username (must contain at least 6 characters)</p>
-					<span class="errorPHP"><?php echo $unameError;?></span>
-					<input type="password" placeholder="PASSWORD" id="pass" name="pass">
-					<p id="errorPassword">Please enter a valid password (must contain at least 1 uppercase and lowercase letter, at least 1 digit, and at least 8 characters)</p>
-					<span class="errorPHP"><?php echo $passError;?></span>
-					<input type="password" placeholder="RE-ENTER PASSWORD" id="pass2" name="pass2">
-					<p id="errorReenteredPassword">Passwords do not match!</p>
-					<span class="errorPHP"><?php echo $pass2Error;?></span>
-					<div id="text">I agree to a long list of terms and conditions that I won't read.</div><input type="checkbox" name="checkbox" value="yes">
-					<p id="errorUncheckedBox">You must agree to our terms and conditions!</p>
-					<span class="errorPHP"><?php echo $checkboxError;?></span>
-					<button class="button button2">Submit</button> 
-				</form>
+				<?php
+				$name = $birthdate = $email = $username = "";
+				if (!empty($_POST)){
+					$name = $_POST['name'];
+					$birthdate = $_POST['bday'];
+					$email = $_POST['email'];
+					$username = $_POST['uname'];
+				}
+				echo '<form name="registrationForm" action="/registration/" method="post" onsubmit="formValidate(event)" novalidate>';
+				echo '	<input id="name" type="text" placeholder="NAME" name="name" value="' .$name.'">';
+				echo '	<p id="errorName">Please enter name in the format: First Last</p>';
+				echo '	<span class="errorPHP">'.  $nameError . '</span>';
+				echo '	<div id="birthday">BIRTHDAY</div> <input type="date" name="bday" value="' .$birthdate.'">';
+				echo '	<p id="errorBirthday">Please enter birthday in the format: Year-Month-Date</p>';
+				echo '	<span class="errorPHP">'.  $bdayError . '</span>';
+				echo '	<input type="email" placeholder="E-MAIL" id="email" name="email" value="' .$email. '">';
+				echo '	<p id="errorEmail">Please enter a valid email</p>';
+				echo '	<span class="errorPHP">' . $emailError . '</span>';
+				echo '	<input type="text" placeholder="USERNAME" id="uname" name="uname" value="' .$username.'">';
+				echo '	<p id="errorUserName">Please enter a valid username (must contain at least 6 characters)</p>';
+				echo '	<span class="errorPHP">' . $unameError . '</span>';
+				echo '	<input type="password" placeholder="PASSWORD" id="pass" name="pass">';
+				echo '	<p id="errorPassword">Please enter a valid password (must contain at least 1 uppercase and lowercase letter, at least 1 digit, and at least 8 characters)</p>';
+				echo '	<span class="errorPHP">' . $passError . '</span>';
+				echo '	<input type="password" placeholder="RE-ENTER PASSWORD" id="pass2" name="pass2">';
+				echo '	<p id="errorReenteredPassword">Passwords do not match!</p>';
+				echo '	<span class="errorPHP">' . $pass2Error . '</span>';
+				echo '	<div id="text">I agree to a long list of terms and conditions that I won\'t read.</div><input type="checkbox" name="checkbox" value="yes">';
+				echo '	<p id="errorUncheckedBox">You must agree to our terms and conditions!</p>';
+				echo '	<span class="errorPHP">' . $checkboxError . '</span>';
+				echo '	<button class="button button2">Submit</button> ';
+				echo '</form>';
+				?>
 			</div>
 		</main>
 		<?php

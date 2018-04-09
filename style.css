@@ -628,6 +628,7 @@ form input[type=text] {
 	color: black;
 	width: inherit;
 	font: 0.8em bookman old style;
+	margin-right: -160px;
 	width: 220px;
 	margin-top: 35px;
 	border-bottom: 2px solid #a9a9a9;

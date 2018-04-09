@@ -1,5 +1,6 @@
 <?php
 session_start();
+$ERROR;
 if (!empty($_POST)){
 	if(isset($_POST['logMeOut']) && $_POST['logMeOut'] == 'true'){
 		$_SESSION['log_in'] = False;
@@ -18,6 +19,12 @@ if (!empty($_POST)){
 				$_SESSION['user'] = $user_details['userName'];
 				$_SESSION['userID'] = $user_details['userID'];
 			}
+			else {
+				$ERROR = "Wrong password and Username combination!";
+			}
+		}
+		else {
+			$ERROR = "The username and password weren't filled out!";
 		}
 	}
 }
@@ -42,20 +49,24 @@ if (!empty($_POST)){
 				<img id="secondaryImage" src="/assets/booksStacked.jpeg" alt="booksStacked">
 				<!-- Column containg log in form, which is divded into rows of prompts-->
 				<?php
+				echo '<div>';
+				if (isset($ERROR)){
+					echo '<p style="color: red">' . $ERROR . '</p>';
+				}
 				if(!isset($_SESSION['log_in']) || $_SESSION['log_in'] == False) {
-				echo '<form action="/login/" method="post">';
+				echo '<form action="/login/" method="post" style="float: right">';
 				echo '<input type="text" placeholder="USERNAME" name="user">';
 				echo '<input type="text" placeholder="PASSWORD" name="pass">';
 				echo '<input type="submit" class="button button2" value="Log In">';
 				echo '</form>';
 				}
 				else {
-					echo '<form action="/login/" method="post">';
+					echo '<form action="/login/" method="post" style="float:right">';
 					echo '<input type="hidden" value="true" name="logMeOut">';
 					echo '<input type="submit" class="button button2" value="Log Out">';
 					echo '</form>';
 				}
-				
+				echo '</div>';
 				?>
 			</div>
 		</main>

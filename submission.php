@@ -35,20 +35,20 @@ if (isset($_POST['library_given'])){
 			$library_query->execute([$_POST['library']]);
 			$library_Result = $library_query->fetch();
 			if (empty($library_Result)){
-				$create_library = $pdo->prepare("INSERT INTO Library (libraryID, libraryName, rating, images) VALUES (?,?,?,?)");
+				$create_library = $pdo->prepare("INSERT INTO Library (libraryID, libraryName, rating, images, latitude, longitude) VALUES (?,?,?,?,?,?)");
 				$last_library = $pdo->prepare("SELECT max(libraryID) FROM Library");
 				$last_library->execute();
 				$last_library_result = $last_library->fetch();
 				$last_libraryID = 1 + (int) $last_library_result[0];
 				$rating = "?/5";
-				$create_library->execute([$last_libraryID, $_POST['library'], $rating, $_FILES['file']['name']]);
+				$create_library->execute([$last_libraryID, $_POST['library'], $rating, $_FILES['file']['name'], $_POST['latitude'], $_POST['longitude']]);
 
 				$S3_API = new S3Client([
 					'region' => 'us-east-2',
 					'version' => '2006-03-01',
 					'credentials' => array(
-						'key' => ,
-						'secret' => )
+						'key' => '',
+						'secret' => '')
 				]);
 				try {
 					$S3_API->putObject([

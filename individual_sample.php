@@ -20,7 +20,7 @@ $library_info;
 			sleep(1);
 		}
 		$pdo = new PDO('mysql:host=localhost; dbname=marts_database', 'skretam','Philedelthia12!?');
-		$get_library = $pdo->prepare("SELECT libraryID, libraryName,latitude,longitude rating FROM Library WHERE libraryName=?");
+		$get_library = $pdo->prepare("SELECT libraryID, libraryName,latitude,longitude, rating FROM Library WHERE libraryName=?");
 		$get_library->execute([$_POST['search']]);
 		$library_info = $get_library->fetch();
 		$get_reviews = $pdo->prepare("SELECT libraryID, Review.userID, rating, comments, userNAME FROM Review  INNER JOIN User ON Review.userID = User.userID WHERE libraryID=?");
@@ -84,14 +84,13 @@ $library_info;
 
 						<!-- Buttons in banner that quickly allow user to return to search results or write review -->
 						<div class="buttons">
-							<div class="button2"><a href="/results/">Go back</a></div>
 							<div class="button2">
-								<form action="/submission/" method="post">
-									<?php
-									echo '<input type="hidden" name="library_given" value="'. $library_info['libraryName'] .'">';
-									?>
-									<input type="submit" value="Write review">
-								</form>
+								<?php
+								echo '<form action="/results/" method="post" style="width: 100%;border-radius: 10px;height: 100%;">';
+								echo '	<input type="hidden" value="' . $_POST['search'] .'" name="search">';
+								echo '	<input type="submit" value="Go Back!" style="    width: 100%;border-radius: 10px;height: 100%;">';
+								echo '</form>';
+								?>
 							</div>
 						</div>
 						<!-- Image of map containing location of library -->
@@ -125,7 +124,6 @@ $library_info;
 						<!-- Row #2 -->
 						<?php
 						if(!empty($reviews)){
-							echo 'hello';
 							foreach($reviews as $content){
 							echo '<tr itemprop="review" itemscope itemtype="http://schema.org/Review">';
 							echo '<td>';
@@ -135,7 +133,7 @@ $library_info;
 							echo '<td>';
 							echo '<img src="/assets/5stars.svg" alt="5stars">';
 							echo '<div class="rating" itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating"> 
-										<span itemprop="ratingValue">' . $content['rating'] . '</span></div>';
+										<span itemprop="ratingValue">' . $content['rating'] . '/5</span></div>';
 							echo '</td>';
 							echo '<td>';
 							echo '<div class="comments" itemprop="description">' . $content['comments'] . '</div>';

@@ -23,7 +23,7 @@
 		//Instance new map object using Google Maps API; map is centered at myLatLng
 		var map = new google.maps.Map(document.getElementById('map'), {
 			center: myLatLng,
-			zoom: 15
+			zoom: 16
 		});
 		//Call setMarkers() function with map as input
 		setMarkers(map);

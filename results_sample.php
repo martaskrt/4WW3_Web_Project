@@ -3,30 +3,27 @@ session_start();
 if (!($_SERVER['REQUEST_METHOD'] === 'POST')){
 	header('Location: https://skretam.cs4ww3.ca/');
 }
-echo 'hwllo' . $_POST['Rating']. $_POST['latitude'];
 $posts;
 if (!empty($_POST)){
 $pdo = new PDO('mysql:host=localhost; dbname=marts_database', 'skretam','Philedelthia12!?');
 $template = "%" . $_POST["search"] . "%";
 if (!empty($_POST['Rating']) && !empty($_POST['latitude'])){
-	$get_the_posts = $pdo->prepare("SELECT libraryName, rating, latitude, longitude FROM Library WHERE libraryName LIKE ? AND latitude=? AND longitude=? AND Rating=?");
+	$get_the_posts = $pdo->prepare("SELECT libraryName, rating, latitude, longitude,images FROM Library WHERE libraryName LIKE ? AND latitude=? AND longitude=? AND Rating=?");
 	$get_the_posts->execute([$template,$_POST['latitude'],$_POST['longitude'],$_POST['Rating']]);
 	$posts = $get_the_posts->fetchAll();
-	echo 'hufkdlfj';
 }
 else if (!empty($_POST['latitude'])){
-	$get_the_posts = $pdo->prepare("SELECT libraryName, rating, latitude, longitude FROM Library WHERE libraryName LIKE ? AND latitude=? AND longitude=?");
+	$get_the_posts = $pdo->prepare("SELECT libraryName, rating, latitude, longitude,images FROM Library WHERE libraryName LIKE ? AND latitude=? AND longitude=?");
 	$get_the_posts->execute([[$template],$_POST['latitude'],$_POST['longitude']]);
 	$posts = $get_the_posts->fetchAll();
 }
 else if (!empty($_POST['Rating'])){
-	$get_the_posts = $pdo->prepare("SELECT libraryName, rating, latitude, longitude FROM Library WHERE libraryName LIKE ? AND rating=?");
+	$get_the_posts = $pdo->prepare("SELECT libraryName, rating, latitude, longitude, images FROM Library WHERE libraryName LIKE ? AND rating=?");
 	$get_the_posts->execute([$template,$_POST['Rating']]);
 	$posts = $get_the_posts->fetchAll();
-	echo 'hello';
 }
 else {
-	$get_the_posts = $pdo->prepare("SELECT libraryName, rating, latitude, longitude FROM Library WHERE libraryName LIKE ?");
+	$get_the_posts = $pdo->prepare("SELECT libraryName, rating, latitude, longitude,images FROM Library WHERE libraryName LIKE ?");
 	$get_the_posts->execute([$template]);
 	$posts = $get_the_posts->fetchAll();
 }
@@ -78,14 +75,12 @@ else {
 						foreach ($posts as $number=>$content){
 							$key_plus = $number + 1;
 							echo '<tr>'; //<!-- Row #2 -->
-							echo '<td><form action="/results/sample/" method="post"><input type="hidden" name="search" value="' . $content["libraryName"] . '"><input type="submit" value="' . $key_plus . ". " . $content["libraryName"] . '"></form></td>'; //<!-- First column containing library name-->
+							echo '<td><form action="/results/sample/" method="post" style="width: inherit"><input type="hidden" name="search" value="' . $content["libraryName"] . '"><input type="submit" value="' . $key_plus . ". " . $content["libraryName"] . '"></form></td>'; //<!-- First column containing library name-->
 							echo '<td>'; //<!-- Second column containg average rating of library -->
 								echo '<img id="4.5stars" src="/assets/4.5stars.svg" alt="5stars">';
-								echo '<div id="rating_number">' . $content['rating'] . '</div></td>'; 
+								echo '<div id="rating_number">' . $content['rating'] . '/5</div></td>'; 
 								echo '<td>'; //<!-- Third column containg images of library -->
-									echo '<img class="item" src="/assets/tempImage.svg" alt="hthsci1">';
-									echo '<img class="item" src="/assets/tempImage.svg" alt="hthsci2">';
-									echo '<img class="item" src="/assets/tempImage.svg" alt="hthsci3">';
+									echo '<img class="item" src="https://s3.us-east-2.amazonaws.com/marta-skreta-image-bucket/' . $content['images'] . '" alt="hthsci1">';
 								echo '</td>';
 							echo '</tr>';
 						}

@@ -2,7 +2,7 @@
 			<img id="theLibLogo" src="/assets/theLibSmallLogo.svg" alt="theLibLogo"> 	<!-- logo image -->
 			<ul class="menu-left"> 	<!-- unordered list for left half of header; navigates to search or review pages -->
 				<li><a href="/">Search</a></li>
-				<li><a href="/submission/">Write a Review</a></li>
+				<li><a href="/submission/">Add a new Library</a></li>
 			</ul>
 			<ul class="menu-right" style="display:flex"> <!-- unordered list for right half of header; navigates to log in or sign up pages -->
 				<?php
@@ -21,7 +21,7 @@
 				<button class="button1">Menu &#x25BC;</button> <!-- Menu button that drops down to list of all pages-->
 				<div class="dropdown_content">
 					<div class="item"><a href="/">Search</a></div>
-					<div class="item"><a href="/submission/">Write a Review</a></div>
+					<div class="item"><a href="/submission/">Add a new Library</a></div>
 					<div class="item"><a href="/login/">Log In</a></div>
 					<div class="item"><a href="/registration/">Sign Up</a></div>
 				</div>
