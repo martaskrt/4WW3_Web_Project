@@ -18,8 +18,10 @@ session_start();
 		}
 		function success(position){
 			var userPosition = position.coords;
-			console.log(`Your current latitude is: ${userPosition.latitude}`); //print user latitude to console
-			console.log(`Your current longitude is: ${userPosition.longitude}`); //print user longitude to console
+			var lat = document.getElementById('latitude'); //gets element latitude, which is box in doc where I will store my latitude in 
+			var lng = document.getElementById('longitude'); //gets element longitude, which is box in doc where I will store my longitude in 
+			lat.value = userPosition.latitude; //change value of lat to user's latitude
+			lng.value = userPosition.longitude; //change value of lng to user's longitude
 		}
 
 		function error(error) {
