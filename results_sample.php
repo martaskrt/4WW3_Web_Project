@@ -8,20 +8,22 @@ $posts;
 if (!empty($_POST)){
 $pdo = new PDO('mysql:host=localhost; dbname=marts_database', 'skretam','Philedelthia12!?');
 $template = "%" . $_POST["search"] . "%";
-if (isset($_POST['Rating']) && isset($_POST['latitude'])){
+if (!empty($_POST['Rating']) && !empty($_POST['latitude'])){
 	$get_the_posts = $pdo->prepare("SELECT libraryName, rating, latitude, longitude FROM Library WHERE libraryName LIKE ? AND latitude=? AND longitude=? AND Rating=?");
-	$get_the_posts->execute([$template],$_POST['latitude'],$_POST['longitude'],$_POST['Rating']);
+	$get_the_posts->execute([$template,$_POST['latitude'],$_POST['longitude'],$_POST['Rating']]);
 	$posts = $get_the_posts->fetchAll();
+	echo 'hufkdlfj';
 }
-else if (isset($_POST['latitude'])){
+else if (!empty($_POST['latitude'])){
 	$get_the_posts = $pdo->prepare("SELECT libraryName, rating, latitude, longitude FROM Library WHERE libraryName LIKE ? AND latitude=? AND longitude=?");
-	$get_the_posts->execute([$template],$_POST['latitude'],$_POST['longitude']);
+	$get_the_posts->execute([[$template],$_POST['latitude'],$_POST['longitude']]);
 	$posts = $get_the_posts->fetchAll();
 }
-else if (isset($_POST['Rating'])){
+else if (!empty($_POST['Rating'])){
 	$get_the_posts = $pdo->prepare("SELECT libraryName, rating, latitude, longitude FROM Library WHERE libraryName LIKE ? AND rating=?");
-	$get_the_posts->execute([$template],$_POST['Rating']);
+	$get_the_posts->execute([$template,$_POST['Rating']]);
 	$posts = $get_the_posts->fetchAll();
+	echo 'hello';
 }
 else {
 	$get_the_posts = $pdo->prepare("SELECT libraryName, rating, latitude, longitude FROM Library WHERE libraryName LIKE ?");
