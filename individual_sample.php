@@ -5,14 +5,23 @@ if (!($_SERVER['REQUEST_METHOD'] === 'POST')){
 }
 $library_info;
 	if (!empty($_POST)){
-		$pdo = new PDO('mysql:host=localhost; dbname=marts_database', 'skretam','Philedelthia12!?');
-		$get_library = $pdo->prepare("SELECT libraryID, libraryName,latitude,longitude rating FROM Library WHERE libraryName=?");
-		$get_library->execute([$_POST['search']]);
-		$library_info = $get_library->fetch();
-		$get_reviews = $pdo->prepare("SELECT libraryID, Review.userID, rating, comments, userNAME FROM Review  INNER JOIN User ON Review.userID = User.userID WHERE libraryID=?");
-		$get_reviews->execute([$library_info['libraryID']]);
-		
-		$reviews = $get_reviews->fetchAll();
+		if(!isset($_POST['review'])){
+			$pdo = new PDO('mysql:host=localhost; dbname=marts_database', 'skretam','Philedelthia12!?');
+			$get_library = $pdo->prepare("SELECT libraryID, libraryName,latitude,longitude rating FROM Library WHERE libraryName=?");
+			$get_library->execute([$_POST['search']]);
+			$library_info = $get_library->fetch();
+			$get_reviews = $pdo->prepare("SELECT libraryID, Review.userID, rating, comments, userNAME FROM Review  INNER JOIN User ON Review.userID = User.userID WHERE libraryID=?");
+			$get_reviews->execute([$library_info['libraryID']]);
+			$reviews = $get_reviews->fetchAll();
+		}
+		else {
+			$pdo = new PDO('mysql:host=localhost; dbname=marts_database', 'skretam','Philedelthia12!?');
+			$post_review = $pdo->prepare("INSERT INTO Review (comments, rating, userID, libraryID) VALUES (?,?,?,?)");
+			$get_libraryID = $pdo->prepare("SELECT libraryID FROM Library WHERE libraryName=?");
+			$get_library->execute([$_POST['search']]);
+			$library_info = $get_library->fetch();
+			$post_review->execute([$_POST['review'],$_POST['rating'],$_SESSION['id'],$library_info['libraryID']]);
+		}
 }
 ?>
 <!DOCTYPE html>
@@ -130,8 +139,26 @@ $library_info;
 							echo '</tr>';
 						}
 						}
-							?>
+						?>
 						</table>
+						<?php
+						if (isset($_SESSION['log_in']) && $_SESSION['log_in'] == True){
+						echo '<div id="th2" style="color: black;">';
+  							echo '<form action="/results/sample/" method="post" style="width: 100%;">';
+    							echo '<input required name="review" style="width: 80%;height: 150px;border: 1px solid grey;" type="text">';
+    							echo '<input name="search" type="hidden" value="' . $_POST['search']. '">';
+    							echo '<select name="rating" style="display: inline;color: black;background: #e4e4e4;border: 0px;margin: 10px;width: 20%;height: 30px;">';
+  									echo '<option value="0">Rate Library</option>';
+  									echo '<option value="1">1</option>';
+  									echo '<option value="2">2</option>';
+  									echo '<option value="3">3</option>';
+  									echo '<option value="4">4</option>';
+  									echo '<option value="5">5</option>';
+								echo '</select><input value="Add Review!" style="border: 0px;width: 20%;height: 30px;margin-bottom: 30px;" type="submit">';
+  								echo '</form>';
+							echo '</div>';
+						}
+						?>
 					</div>
 				</div>
 			</main>

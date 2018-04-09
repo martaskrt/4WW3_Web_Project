@@ -13,6 +13,5 @@
 			map: map,
 			title: library.libraryName
 		});
-
 	}
 
