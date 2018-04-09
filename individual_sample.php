@@ -143,7 +143,7 @@ $library_info;
 						</table>
 						<?php
 						if (isset($_SESSION['log_in']) && $_SESSION['log_in'] == True){
-						echo '<div id="th2" style="color: black;">';
+						echo '<div id="th2" style="color: black; opacity: 100">';
   							echo '<form action="/results/sample/" method="post" style="width: 100%;">';
     							echo '<input required name="review" style="width: 80%;height: 150px;border: 1px solid grey;" type="text">';
     							echo '<input name="search" type="hidden" value="' . $_POST['search']. '">';
