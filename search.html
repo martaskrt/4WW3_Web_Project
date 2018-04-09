@@ -63,15 +63,9 @@ session_start();
 							</div>
 						<span class="input-prompt">Proximity:</span>
 						<!--  Dropdown menu to select distance of query from user -->
-						<div class="dropdown">
-							<button>Any &#x25BC;</button> <!-- Prompt for dropdown menu -->
-							<div class="dropdown_content"> <!--  Dropdown menu containing different distances  -->
-								<!--  Get user's geolocation using getLocation() function in header  -->
-								<button class="item" onclick="getLocation()">Current Location</button>
+						<button class="item" onclick="getLocation()">Current Location</button>
 								<input type="hidden" name="latitude" id="latitude" value="">
-								<input type="hidden" name="longitude" id="longitude" value="">
-							</div>
-						</div> 
+								<input type="hidden" name="longitude" id="longitude" value=""> 
 						<!-- Image of search icon which user can click to submit results -->
 						<input type="submit" style="width: 120px;
 						font: 1em bookman old style;
