@@ -6,7 +6,7 @@ if (!($_SERVER['REQUEST_METHOD'] === 'POST')){
 $library_info;
 	if (!empty($_POST)){
 		$pdo = new PDO('mysql:host=localhost; dbname=marts_database', 'skretam','Philedelthia12!?');
-		$get_library = $pdo->prepare("SELECT libraryID, libraryName, rating FROM Library WHERE libraryName=?");
+		$get_library = $pdo->prepare("SELECT libraryID, libraryName,latitude,longitude rating FROM Library WHERE libraryName=?");
 		$get_library->execute([$_POST['search']]);
 		$library_info = $get_library->fetch();
 		$get_reviews = $pdo->prepare("SELECT libraryID, Review.userID, rating, comments, userNAME FROM Review  INNER JOIN User ON Review.userID = User.userID WHERE libraryID=?");
